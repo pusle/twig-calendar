@@ -1,2 +1,2 @@
-# twig-calendar-month
-Pure twig calendar for a month view
+# twig-calendar
+Pure twig calendar
