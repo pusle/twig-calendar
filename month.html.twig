@@ -1,0 +1,65 @@
+{% set today = "NOW" | date("Ymd") %}
+{% set displayingDate = today | date_modify("first day of this month") %}
+{% set weekdayDate = displayingDate %}
+{% set daysInMonth = displayingDate | date('t') %}
+{% set startDow = displayingDate | date('F 1\\s\\t Y') | date('N') - 1 %}
+{% set dow = startDow %}
+
+<table class="calendar">
+    <thead>
+    <tr>
+        <th width="15%">Mo</th>
+        <th width="15%">Tu</th>
+        <th width="16%">We</th>
+        <th width="15%">Th</th>
+        <th width="15%">Fr</th>
+        <th width="12%">Sa</th>
+        <th width="12%">Su</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        {% for day in range(1,daysInMonth) %}
+
+        {# Set variables needed to show cells #}
+        {% set dayClass = (weekdayDate | date("Ymd") == today) ? " today" : ""  %}
+        {% set loopDate = weekdayDate | date("Ymd") %}
+
+        {% if loop.first and startDow != 0 %}
+            <td colspan="{{ startDow }}">
+                <span class="week-number">{{ weekdayDate|date("W") }}</span>
+            </td>
+        {% endif %}
+
+        {# Start calendar day cell #}
+        <td class="day{{ dayClass }}" data-celldate="{{ loopDate }}">
+            {# Display week number? #}
+            {% if dow == 0 %}
+                <span class="week-number">{{ weekdayDate|date("W") }}</span>
+            {% endif %}
+
+            {# Cell date #}
+            <span class="calendar-date {% if dow > 4 %}weekend{% endif %} {% if dow == 6 %}sunday{% endif %}">
+                {{ day }}
+            </span>
+            <ul class="events">
+
+            </ul>
+        </td>
+
+        {% if loop.last and dow != 6 %}
+            <td colspan="{{ 6 - dow }}">&nbsp;</td>
+        {% endif %}
+        {% if dow == 6 %}
+        {% set dow = 0 %}
+    </tr>
+    <tr>
+        {% else %}
+            {% set dow = dow + 1 %}
+        {% endif %}
+
+        {% set weekdayDate = weekdayDate|date_modify("+1 day") %}
+        {% endfor %}
+    </tr>
+    </tbody>
+</table>
