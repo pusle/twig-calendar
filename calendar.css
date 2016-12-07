@@ -1,0 +1,216 @@
+/**
+ * Calendar table
+ */
+table.calendar {
+    width: 100%;
+    max-width: 100%;
+    table-layout: fixed;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+table.calendar tr {
+    border-top: 1px solid #ccc;
+}
+
+table.calendar th,
+table.calendar td {
+    padding: 5px;
+    vertical-align: top;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    text-align: center;
+    width: 14.29%;
+}
+
+table.calendar th {
+    height: auto;
+}
+
+table.calendar td {
+    max-width: 14.285714286%;
+    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
+    user-select: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+table.calendar td span.calendar-date {
+    height: 20px;
+    width: 20px;
+    line-height: 20px;
+    display: inline-block;
+    border-radius: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+table.calendar td.last-month span.calendar-date,
+table.calendar td.next-month span.calendar-date {
+    color: #aaa;
+}
+
+table.calendar td.today span.calendar-date {
+    background: transparent;
+    color: #C42727;
+    font-weight: 400;
+}
+
+table.calendar td.active span.calendar-date {
+    background-color: #0098cd;
+    color: #fff;
+    font-weight: 400;
+}
+
+table.calendar td.active.today span.calendar-date {
+    background-color: #C42727;
+    color: #fff;
+    font-weight: 400;
+}
+
+table.calendar span.week-number {
+    width: 25px;
+    height: 25px;
+    font-weight: 400;
+    border-radius: 25px;
+    line-height: 25px;
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    color: #aaa;
+}
+
+
+/**
+ * Event box
+ */
+.events {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.event {
+    max-width: inherit;
+    font-size: .9em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.event:not(:first-of-type) {
+    margin-top: 3px;
+}
+
+.event a {
+    padding: 3px;
+    color: #fff;
+    display: block;
+    background: #0098cd url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAADklEQVQImWNgQAVSZHAADXgAaQuCV7gAAAAASUVORK5CYII=);
+    border-left: 3px solid #0098cd;
+}
+
+.event a:active,
+.event a:focus,
+.event a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+/**
+ * Calendar Responsive
+ */
+@media only screen and (min-width: 768px ) {
+    table.calendar td {
+        padding-top: 30px;
+        height: 100px;
+        min-height: 70px;
+        position: relative;
+        text-align: left;
+        vertical-align: bottom;
+    }
+
+    table.calendar td span.calendar-date {
+        width: 25px;
+        height: 25px;
+        font-weight: 400;
+        border-radius: 25px;
+        line-height: 25px;
+        display: block;
+        position: absolute;
+        top: 4px;
+        right: 4px;
+    }
+
+    table.calendar td.today span.calendar-date {
+        box-shadow: none;
+        background: #333;
+        color: #eee;
+    }
+
+    table.calendar td.no-event {
+        background-color: #fe7e01;
+        color: #fff;
+    }
+
+    table.calendar td.no-event span.calendar-date {
+        background-color: transparent;
+        color: #fff;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+    table.calendar td {
+        padding: 0;
+        vertical-align: middle;
+        position: relative;
+        height: 45px;
+    }
+
+    table.calendar td span.calendar-date {
+        width: 33px;
+        height: 33px;
+        line-height: 33px;
+        text-align: center;
+    }
+
+    table.calendar td.today span.calendar-date {
+        border: 1px solid #c42727;
+        line-height: 31px;
+    }
+
+    table.calendar td span.week-number {
+        top: 0;
+        left: 0;
+        font-size: 11px;
+    }
+
+    .events.has-events {
+        margin: 0 auto;
+        padding: 0px;
+        height: 11px;
+        width: 11px;
+        display: inline-block;
+        background-color: #003a5c;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 2px;
+        left: 50%;
+        margin-left: -6px;
+    }
+
+    table.calendar td .events .event {
+        display: none;
+    }
+
+    table.calendar td .events .event > * {
+        display: none;
+    }
+}
